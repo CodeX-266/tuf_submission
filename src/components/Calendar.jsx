@@ -73,16 +73,17 @@ export default function Calendar() {
   const monthIndex = currentDate.getMonth();
 
   return (
-    <div className="w-full max-w-5xl mx-auto flex flex-col items-center bg-white rounded-[3rem] shadow-[0_80px_120px_-30px_rgba(0,0,0,0.12)] overflow-hidden border border-zinc-100 ring-1 ring-black/5">
+    <div className="w-full max-w-5xl mx-auto flex flex-col items-center bg-white rounded-[3rem] shadow-[0_80px_120px_-30px_rgba(0,0,0,0.12)] overflow-hidden border border-zinc-100 ring-1 ring-black/5 perspective-1000">
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={monthIndex}
           custom={direction}
-          initial={{ opacity: 0, scale: 0.98, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.98, y: -10 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="w-full"
+          initial={{ rotateX: direction > 0 ? -30 : 30, opacity: 0, scale: 0.95 }}
+          animate={{ rotateX: 0, opacity: 1, scale: 1 }}
+          exit={{ rotateX: direction > 0 ? 30 : -30, opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+          className="w-full origin-top"
+          style={{ transformStyle: 'preserve-3d' }}
         >
           <HeroImage 
             monthName={monthName} 
@@ -95,7 +96,7 @@ export default function Calendar() {
       <div className="w-full flex flex-col md:flex-row p-10 lg:p-14 gap-14 bg-white">
         <div className="flex-[1.5]">
           <div className="flex justify-between items-center mb-10 px-6">
-            <h2 className="text-3xl font-black italic text-indigo-600 tracking-tighter uppercase select-none">
+            <h2 className="text-3xl font-black italic text-zinc-900 tracking-tighter uppercase select-none">
               {monthName}
             </h2>
             <div className="flex gap-4">
@@ -119,10 +120,11 @@ export default function Calendar() {
           <AnimatePresence mode="wait">
             <motion.div
               key={monthIndex}
-              initial={{ opacity: 0, x: direction * 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction * -20 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              initial={{ rotateX: -15, opacity: 0, y: 10 }}
+              animate={{ rotateX: 0, opacity: 1, y: 0 }}
+              exit={{ rotateX: 15, opacity: 0, y: -10 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="origin-top"
             >
               <CalendarGrid 
                 currentDate={currentDate}

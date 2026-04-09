@@ -25,15 +25,15 @@ export default function HeroImage({ monthName, monthIndex, year }) {
           priority
         />
         
-        {/* Overlay Gradient for contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+        {/* Overlay Graduate for contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
 
-        {/* Month/Year Overlay - Styled exactly like the reference */}
+        {/* Month/Year Overlay - Extra Bold for consistency */}
         <div className="absolute bottom-16 right-12 text-right text-white z-20 select-none">
-          <div className="text-sm font-bold uppercase tracking-[0.5em] opacity-90 mb-2 drop-shadow-md">
+          <div className="text-sm font-black uppercase tracking-[0.6em] opacity-90 mb-3 drop-shadow-lg">
             {year}
           </div>
-          <h2 className="text-7xl md:text-8xl font-black italic tracking-tighter uppercase drop-shadow-2xl leading-none">
+          <h2 className="text-7xl md:text-9xl font-black italic tracking-tighter uppercase drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] leading-none">
             {monthName}
           </h2>
         </div>
@@ -42,7 +42,6 @@ export default function HeroImage({ monthName, monthIndex, year }) {
         <div className="absolute bottom-[-1px] inset-x-0 h-24 bg-white z-10" 
              style={{ 
                clipPath: 'polygon(0 100%, 100% 100%, 100% 20%, 80% 50%, 60% 0, 40% 50%, 20% 10%, 0 40%)',
-               filter: 'drop-shadow(0 -5px 10px rgba(0,0,0,0.1))'
              }}>
         </div>
       </div>

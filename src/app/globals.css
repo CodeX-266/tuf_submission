@@ -56,3 +56,8 @@ body {
   background: var(--background) !important;
   color: var(--foreground) !important;
 }
+
+/* 3D Perspective helper */
+.perspective-1000 {
+  perspective: 1000px;
+}

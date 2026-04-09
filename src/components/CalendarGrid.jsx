@@ -15,10 +15,10 @@ export default function CalendarGrid({
   const calendarDays = getCalendarDays(year, month);
 
   return (
-    <div className="w-full bg-white dark:bg-zinc-950 px-8 pb-8">
+    <div className="w-full bg-white px-8 pb-8">
       <div className="grid grid-cols-7 mb-4">
         {days.map(day => (
-          <div key={day} className="py-2 text-center text-[10px] font-black text-zinc-400 tracking-widest leading-none">
+          <div key={day} className="py-2 text-center text-[11px] font-black text-zinc-400 tracking-[0.2em] leading-none">
             {day}
           </div>
         ))}

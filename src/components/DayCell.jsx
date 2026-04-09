@@ -11,19 +11,20 @@ export default function DayCell({
     <div 
       onClick={onClick}
       className={`
-        relative aspect-square p-2 cursor-pointer transition-all duration-200 group
+        relative aspect-square p-2 cursor-pointer transition-all duration-300 group
         flex flex-col items-center justify-center
-        ${!isCurrentMonth ? 'text-zinc-300 dark:text-zinc-600' : 'text-zinc-900 dark:text-zinc-100'}
-        ${isMiddle ? 'bg-indigo-50 dark:bg-indigo-900/20' : ''}
-        ${isStart ? 'bg-indigo-600 rounded-l-full text-white !dark:text-white' : ''}
-        ${isEnd ? 'bg-indigo-600 rounded-r-full text-white !dark:text-white' : ''}
+        ${!isCurrentMonth ? 'text-zinc-200' : 'text-zinc-900'}
+        ${isMiddle ? 'bg-indigo-50/80' : ''}
+        ${isStart ? 'bg-indigo-600 rounded-l-full text-white' : ''}
+        ${isEnd ? 'bg-indigo-600 rounded-r-full text-white' : ''}
         ${isStart && isEnd ? 'rounded-full' : ''}
-        hover:bg-zinc-100 dark:hover:bg-zinc-800
+        hover:bg-zinc-50
       `}
     >
       <span className={`
-        text-sm font-semibold relative z-10
+        text-sm font-bold tracking-tight relative z-10
         ${(isStart || isEnd) ? 'text-white' : ''}
+        ${isCurrentMonth ? '' : 'font-medium'}
       `}>
         {day}
       </span>
@@ -37,7 +38,7 @@ export default function DayCell({
       
       {/* Visual connection for range */}
       {isMiddle && (
-        <div className="absolute inset-y-0 -inset-x-[1px] bg-indigo-50 dark:bg-indigo-900/20 z-0" />
+        <div className="absolute inset-y-0 -inset-x-[1px] bg-indigo-50/80 z-0" />
       )}
     </div>
   );

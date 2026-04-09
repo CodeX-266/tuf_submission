@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import HeroImage from './HeroImage';
 import CalendarGrid from './CalendarGrid';
 import NotesPanel from './NotesPanel';
@@ -11,6 +12,7 @@ export default function Calendar() {
   const [rangeStart, setRangeStart] = useState(null);
   const [rangeEnd, setRangeEnd] = useState(null);
   const [notes, setNotes] = useState({});
+  const [direction, setDirection] = useState(0);
 
   // Load notes from localStorage
   useEffect(() => {
@@ -62,45 +64,75 @@ export default function Calendar() {
   };
 
   const changeMonth = (offset) => {
+    setDirection(offset);
     setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() + offset, 1));
   };
 
+  const monthName = getMonthName(currentDate.getMonth());
+  const year = currentDate.getFullYear();
+  const monthIndex = currentDate.getMonth();
+
   return (
-    <div className="w-full max-w-5xl mx-auto flex flex-col items-center bg-white dark:bg-zinc-950 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden border border-zinc-100 dark:border-zinc-800">
-      <HeroImage 
-        monthName={getMonthName(currentDate.getMonth())} 
-        year={currentDate.getFullYear()} 
-      />
+    <div className="w-full max-w-5xl mx-auto flex flex-col items-center bg-white rounded-[3rem] shadow-[0_80px_120px_-30px_rgba(0,0,0,0.12)] overflow-hidden border border-zinc-100 ring-1 ring-black/5">
+      <AnimatePresence mode="wait" custom={direction}>
+        <motion.div
+          key={monthIndex}
+          custom={direction}
+          initial={{ opacity: 0, scale: 0.98, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.98, y: -10 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="w-full"
+        >
+          <HeroImage 
+            monthName={monthName} 
+            monthIndex={monthIndex}
+            year={year} 
+          />
+        </motion.div>
+      </AnimatePresence>
       
-      <div className="w-full flex flex-col md:flex-row p-8 lg:p-12 gap-12">
+      <div className="w-full flex flex-col md:flex-row p-10 lg:p-14 gap-14 bg-white">
         <div className="flex-[1.5]">
-          <div className="flex justify-between items-center mb-8 px-8">
-            <h2 className="text-2xl font-black italic text-indigo-600 dark:text-indigo-400 tracking-tight">
-              {getMonthName(currentDate.getMonth())}
+          <div className="flex justify-between items-center mb-10 px-6">
+            <h2 className="text-3xl font-black italic text-indigo-600 tracking-tighter uppercase select-none">
+              {monthName}
             </h2>
             <div className="flex gap-4">
               <button 
                 onClick={() => changeMonth(-1)}
-                className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors border border-zinc-200 dark:border-zinc-800 shadow-sm"
+                className="p-3 hover:bg-zinc-50 active:scale-95 rounded-full transition-all border border-zinc-100 shadow-sm bg-white"
+                title="Previous Month"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
               </button>
               <button 
                 onClick={() => changeMonth(1)}
-                className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors border border-zinc-200 dark:border-zinc-800 shadow-sm"
+                className="p-3 hover:bg-zinc-50 active:scale-95 rounded-full transition-all border border-zinc-200 shadow-sm bg-white"
+                title="Next Month"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
               </button>
             </div>
           </div>
           
-          <CalendarGrid 
-            currentDate={currentDate}
-            rangeStart={rangeStart}
-            rangeEnd={rangeEnd}
-            onDateClick={handleDateClick}
-            notes={notes}
-          />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={monthIndex}
+              initial={{ opacity: 0, x: direction * 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: direction * -20 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <CalendarGrid 
+                currentDate={currentDate}
+                rangeStart={rangeStart}
+                rangeEnd={rangeEnd}
+                onDateClick={handleDateClick}
+                notes={notes}
+              />
+            </motion.div>
+          </AnimatePresence>
         </div>
         
         <div className="flex-1">
@@ -112,9 +144,9 @@ export default function Calendar() {
         </div>
       </div>
 
-      <div className="w-full py-6 bg-zinc-50 dark:bg-zinc-900/50 border-t border-zinc-100 dark:border-zinc-800 text-center">
-        <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-          Classic Wall Calendar Series &bull; 2026 Edition
+      <div className="w-full py-8 bg-zinc-50/50 border-t border-zinc-100 text-center select-none">
+        <p className="text-[11px] font-black text-zinc-400 uppercase tracking-[0.4em]">
+          Interactive Digital Stationery &bull; Series 2026
         </p>
       </div>
     </div>

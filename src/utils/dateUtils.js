@@ -85,3 +85,8 @@ export const getCalendarDays = (year, month) => {
 export const getMonthName = (monthIndex) => {
   return new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(2026, monthIndex));
 };
+
+export const getMonthImage = (monthIndex) => {
+  const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+  return `/${months[monthIndex]}.png`;
+};

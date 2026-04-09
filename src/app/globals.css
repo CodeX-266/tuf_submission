@@ -1,19 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Inter:wght@100..900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbfbfc; /* Paper-like off-white */
+  --foreground: #111827;
+  --accent: #4f46e5;
 }
 
+/* Force light theme by ignoring prefers-color-scheme */
 @theme {
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: "Outfit", "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Inter", serif;
 }
 
 body {
@@ -26,19 +23,21 @@ body {
 
 /* Premium Wall Calendar Textures */
 .calendar-paper {
-  background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
   background-size: 24px 24px;
 }
 
-/* Page flip transition placeholder */
-.flip-enter {
-  transform: rotateX(-90deg);
-  opacity: 0;
+/* Page flip transition */
+.page-flip-enter {
+  transform-origin: top;
+  animation: flipDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-.flip-enter-active {
-  transform: rotateX(0deg);
-  opacity: 1;
-  transition: transform 500ms, opacity 500ms;
+
+@keyframes flipDown {
+  0% { transform: rotateX(-30deg); opacity: 0; }
+  100% { transform: rotateX(0deg); opacity: 1; }
 }
 
 /* Ring binder hole shadows */
@@ -48,10 +47,12 @@ body {
 
 /* Lined paper lines */
 .lined-paper {
-  background-image: linear-gradient(to bottom, transparent 31px, #e5e7eb 31px);
+  background-image: linear-gradient(to bottom, transparent 31px, #f3f4f6 31px);
   background-size: 100% 32px;
 }
 
-.dark .lined-paper {
-  background-image: linear-gradient(to bottom, transparent 31px, #27272a 31px);
+/* Override any dark mode classes */
+.dark body {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
 }

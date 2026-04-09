@@ -1,16 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Inter:wght@100..900&display=swap');
 @import "tailwindcss";
 
 :root {
   --background: #fbfbfc; /* Paper-like off-white */
   --foreground: #111827;
-  --accent: #4f46e5;
+  --accent-color: #4f46e5; /* Dynamic accent */
 }
 
-/* Force light theme by ignoring prefers-color-scheme */
 @theme {
-  --font-sans: "Outfit", "Inter", system-ui, -apple-system, sans-serif;
-  --font-serif: "Inter", serif;
+  --font-sans: var(--font-outfit), var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-inter), serif;
 }
 
 body {
@@ -19,6 +17,12 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* GPU Acceleration for smooth transitions */
+.gpu-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 /* Premium Wall Calendar Textures */
@@ -61,3 +65,10 @@ body {
 .perspective-1000 {
   perspective: 1000px;
 }
+
+/* Dynamic Accent Classes */
+.bg-accent { background-color: var(--accent-color); }
+.text-accent { color: var(--accent-color); }
+.border-accent { border-color: var(--accent-color); }
+.ring-accent { --tw-ring-color: var(--accent-color); }
+.bg-accent-soft { background-color: color-mix(in srgb, var(--accent-color), white 90%); }

@@ -90,3 +90,21 @@ export const getMonthImage = (monthIndex) => {
   const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
   return `/${months[monthIndex]}.png`;
 };
+
+export const getMonthTheme = (monthIndex) => {
+  const themes = [
+    '#0ea5e9', // Jan: Sky Blue (Snow)
+    '#6366f1', // Feb: Indigo (Icy)
+    '#10b981', // Mar: Emerald (Spring)
+    '#f43f5e', // Apr: Rose (Blossoms)
+    '#84cc16', // May: Lime (Forest)
+    '#f59e0b', // Jun: Amber (Beach)
+    '#06b6d4', // Jul: Cyan (Tropical)
+    '#14b8a6', // Aug: Teal (Summer)
+    '#eab308', // Sep: Gold (Harvest)
+    '#f97316', // Oct: Orange (Autumn)
+    '#78350f', // Nov: Brown/Rust (Moody)
+    '#be123c'  // Dec: Crimson (Winter)
+  ];
+  return themes[monthIndex];
+};

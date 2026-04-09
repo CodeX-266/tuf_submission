@@ -33,18 +33,18 @@ export default function HeroImage({ monthName, monthIndex, year, accentColor }) 
                opacity: 0.4 
              }} />
 
-        {/* Month/Year Overlay - Clean bold non-italic */}
-        <div className="absolute bottom-16 left-12 text-left text-white z-20 select-none">
-          <div className="text-sm font-black uppercase tracking-[0.6em] opacity-90 mb-3 drop-shadow-lg">
+        {/* Month/Year Overlay - Responsive scaling */}
+        <div className="absolute bottom-10 md:bottom-16 left-8 md:left-12 text-left text-white z-20 select-none">
+          <div className="text-[10px] md:text-sm font-black uppercase tracking-[0.6em] opacity-90 mb-2 md:mb-3 drop-shadow-lg">
             {year}
           </div>
-          <h2 className="text-7xl md:text-9xl font-black tracking-tighter uppercase drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] leading-none">
+          <h2 className="text-5xl md:text-7xl lg:text-9xl font-black tracking-tighter uppercase drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] leading-none transition-all duration-500">
             {monthName}
           </h2>
         </div>
 
         {/* Wave Mask / Transition Section */}
-        <div className="absolute bottom-[-1px] inset-x-0 h-24 bg-white z-10" 
+        <div className="absolute bottom-[-1px] inset-x-0 h-16 md:h-24 bg-white z-10" 
              style={{ 
                clipPath: 'polygon(0 100%, 100% 100%, 100% 20%, 80% 50%, 60% 0, 40% 50%, 20% 10%, 0 40%)',
              }}>

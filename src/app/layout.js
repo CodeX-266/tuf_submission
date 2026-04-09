@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Calendar OS | Interactive Digital Stationery",
+  title: "Calendar ",
   description: "A premium, interactive wall calendar component with monthly themes and persistent memos.",
 };
 
